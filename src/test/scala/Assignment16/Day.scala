@@ -1,12 +1,10 @@
 package Assignment16
 
-import Assignment16.Day
-import Assignment16.Planet
-import Assignment16.PlanetSurfaceGravity
 enum Day {
 
     case Monday, Tuesday, Wednesday, Thursday, Friday,Saturday
   }
+
 
 enum Planet(val mass: Double, val radius: Double) {
   case Mercury extends Planet(3.30e23, 2.4397e6)
@@ -33,60 +31,60 @@ enum PlanetSurfaceGravity(val mass: Double,val radius: Double) {
     }
     }
 
-
-
 //main function
-@main def run(): Unit= {
-  println("-----Day Enum Check-----")
-  val today = Day.Monday
-  println(s"today is ${today}")
+object Validation {
+  @main def run(): Unit = {
+    println("-----Day Enum Check-----")
+    val today = Day.Monday
+    println(s"today is ${today}")
 
-  //pattern matching
-  today match {
-    case Day.Saturday=>println("Weekend vibes")
-    case  _          =>println("Workday")
-  }
-  println("\n-----Planet Enum check-----")
-  val planet=Planet.Earth
-  println(s"Planet: ${planet}")
-  println(s"mass: ${planet.mass}kg")
-  println(s"radius: ${planet.radius}meters")
-
-  println("\n--- Planet Surface Gravity Check ---")
-  val surfacePlanet = PlanetSurfaceGravity.Venus
-  println(s"surface gravity of ${surfacePlanet}: ${surfacePlanet.surfaceGravity}m/s²")
-
-  println("\n----Running Unit Tests----")
-  runTest()
-}
-
-//unit test for all enum and methods
-def runTest(): Unit={
-  // Test 1: Day Enum Value Check
-  assert(Day.Monday.toString=="Monday","Test failed:it is not monday")
-  println("Test 1 Passed: Day Enum is right")
-
-  //Test 2: Pattern Matching on Day Enum
-  def describeDay(day:Day):String =
-    day match{
-      case Day.Saturday=>"Weekend"
-      case _           =>"Weekday"
+    //pattern matching
+    today match {
+      case Day.Saturday => println("Weekend vibes")
+      case _ => println("Workday")
     }
+    println("\n-----Planet Enum check-----")
+    val planet = Planet.Earth
+    println(s"Planet: ${planet}")
+    println(s"mass: ${planet.mass}kg")
+    println(s"radius: ${planet.radius}meters")
 
-  assert(describeDay(Day.Tuesday)=="Weekday","Test failed: Tuesday is weekday")
-  assert(describeDay(Day.Saturday)=="Weekend","Test failed: Saturday is weekend")
-  println("Test 2 Passed: Day Enum Pattern matched")
+    println("\n--- Planet Surface Gravity Check ---")
+    val surfacePlanet = PlanetSurfaceGravity.Venus
+    println(s"surface gravity of ${surfacePlanet}: ${surfacePlanet.surfaceGravity}m/s²")
 
-  //Test 3: Planet Enum Value check
-  assert(Planet.Earth.mass==5.97e24,"Test Failed : mass of Earth is wrong")
-  assert(Planet.Mars.radius==3.3895e6,"Test failed : radius of mars is wrong")
-  println("Test 3 Passed : Planet values is correct")
+    println("\n----Running Unit Tests----")
+    runTest()
+  }
 
-  //Test 4 Surface Gravity Method Check
-  val venusGravity=PlanetSurfaceGravity.Venus.surfaceGravity
-  val expectedVenusGravity=6.67430e-11 * 4.87e24 / (6.0518e6 * 6.0518e6)
-  assert(Math.abs(venusGravity -expectedVenusGravity)<1e-10, "Test failed : venus gravity is wrong")
-  println("Test 4 Passed: surface gravity method worked properly")
+  //unit test for all enum and methods
+  def runTest(): Unit = {
+    // Test 1: Day Enum Value Check
+    assert(Day.Monday.toString == "Monday", "Test failed:it is not monday")
+    println("Test 1 Passed: Day Enum is right")
 
-  println("\n All Tests Passed successfully")
+    //Test 2: Pattern Matching on Day Enum
+    def describeDay(day: Day): String =
+      day match {
+        case Day.Saturday => "Weekend"
+        case _ => "Weekday"
+      }
+
+    assert(describeDay(Day.Tuesday) == "Weekday", "Test failed: Tuesday is weekday")
+    assert(describeDay(Day.Saturday) == "Weekend", "Test failed: Saturday is weekend")
+    println("Test 2 Passed: Day Enum Pattern matched")
+
+    //Test 3: Planet Enum Value check
+    assert(Planet.Earth.mass == 5.97e24, "Test Failed : mass of Earth is wrong")
+    assert(Planet.Mars.radius == 3.3895e6, "Test failed : radius of mars is wrong")
+    println("Test 3 Passed : Planet values is correct")
+
+    //Test 4 Surface Gravity Method Check
+    val venusGravity = PlanetSurfaceGravity.Venus.surfaceGravity
+    val expectedVenusGravity = 6.67430e-11 * 4.87e24 / (6.0518e6 * 6.0518e6)
+    assert(Math.abs(venusGravity - expectedVenusGravity) < 1e-10, "Test failed : venus gravity is wrong")
+    println("Test 4 Passed: surface gravity method worked properly")
+
+    println("\n All Tests Passed successfully")
+  }
 }
